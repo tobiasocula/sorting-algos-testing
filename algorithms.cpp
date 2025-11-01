@@ -79,29 +79,30 @@ std::vector<int> quick_sort(std::vector<int> arr) {
 
 std::vector<int> merge_sort(std::vector<int> arr) {
     size_t n = arr.size();
-    if (n == 1)
-        return arr;
+    if (n <= 1) return arr;
 
-    std::vector<int> l(arr.begin() + n / 2, arr.end());
-    std::vector<int> r(arr.begin(), arr.begin() + n / 2);
-    l = merge_sort(l);
-    r = merge_sort(r);
-    std::vector<int> res;
+    size_t mid = n / 2;
+    std::vector<int> left(arr.begin(), arr.begin() + mid);
+    std::vector<int> right(arr.begin() + mid, arr.end());
+    left = merge_sort(left);
+    right = merge_sort(right);
 
-    while (true) {
-        if (l.empty())
-            return [] (auto a, auto b) { a.insert(a.end(), b.begin(), b.end()); return a; }(res, r);
-        if (r.empty())
-            return [] (auto a, auto b) { a.insert(a.end(), b.begin(), b.end()); return a; }(res, l);
+    std::vector<int> result;
+    size_t i = 0, j = 0;
 
-        if (l.front() < r.front()) {
-            res.push_back(l.front());
-            l.erase(l.begin());
+    while (i < left.size() && j < right.size()) {
+        if (left[i] < right[j]) {
+            result.push_back(left[i++]);
         } else {
-            res.push_back(r.front());
-            r.erase(r.begin());
+            result.push_back(right[j++]);
         }
     }
+    // Copy remaining elements
+    while (i < left.size())
+        result.push_back(left[i++]);
+    while (j < right.size())
+        result.push_back(right[j++]);
+    return result;
 }
 
 std::vector<int> counting_sort(const std::vector<int>& arr) {

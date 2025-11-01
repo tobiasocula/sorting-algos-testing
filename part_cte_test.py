@@ -7,10 +7,12 @@ from help_funcs import mostly_constant_array
 N_TESTS = 10
 NUM_ARRAYS_PER_TEST = 200
 START_LEN = 100
-END_LEN = 10000
+END_LEN = 10_000
 array_lengths = np.unique(np.logspace(np.log10(START_LEN), np.log10(END_LEN), num=NUM_ARRAYS_PER_TEST, dtype=int))
 AVG_NUM_COUNT = 5
 constant_ratio = 0.85
+
+print('longest arrlen:', max(array_lengths))
 
 times = np.empty((len(array_lengths), 6, N_TESTS))
 
@@ -42,6 +44,10 @@ for j in range(N_TESTS):
         t = time.time()
         algorithms.radix_sort(arr)
         times[i, 5, j] = time.time() - t
+
+        #print(f"arrlen {arrlen} done")
+
+    print(f"test {j+1} done")
 
 times_final = np.mean(times, axis=2)
 algos = [
