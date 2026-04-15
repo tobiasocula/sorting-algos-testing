@@ -9,7 +9,9 @@ The currently implemented algorithms are:
 -quicksort  
 -mergesort  
 -counting sort  
--radix sort  
+-radix sort
+
+I have tested these on a Linux machine running an i5 9600k processor, 16GB of DDR4 RAM and an RTX 2070 card.
 
 #### Overview of each file
 
@@ -54,3 +56,7 @@ Another general test where I only consider counting and radix sort and compare t
 Array lengths used: from length 100 to 400,000 (equally distributed in log-space)
 
 ![alt text](image-3.png)
+
+### Conclusion
+
+Not much new came out of these tests. Clearly the linear sorting algorithms are the fastest.
